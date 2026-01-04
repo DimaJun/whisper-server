@@ -22,7 +22,7 @@ export class UserService {
                     id: true,
                     email: true,
                     username: true,
-                }
+                },
             });
         } catch (e) {
             if (e instanceof PrismaClientKnownRequestError) {
@@ -38,8 +38,14 @@ export class UserService {
     }
 
     async findByEmail(email: string) {
-        return await this.prisma.user.findUnique({
+        return this.prisma.user.findUnique({
             where: { email },
+        });
+    }
+
+    async findById(id: string) {
+        return this.prisma.user.findUnique({
+            where: { id },
         });
     }
 }
